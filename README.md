@@ -1,4 +1,4 @@
-# Empyrion - Playtime Rewards Shop Mod
+# # Empyrion - Playtime Rewards Shop Mod
 
 ## What is it?
 With this mod, players can buy items from their playtime.
@@ -55,9 +55,14 @@ Currently these stats are implemented:
 Enter the command into the server or faction chat in your game.
 
 ```
-\prs help    : shows all available commands in a Window
-\prs points  : updates the points for the player
-\prs buy neo : buys the item neo with the conditions of the configuration file from the player points
-\prs buy life: increases the maximum health of the player with the conditions from the configuration file
+\prs help        : shows all available commands in a Window
+\prs points      : updates the points for the player
+
+\prs buy irn     : buys the item iron ingot with the conditions of the configuration file from the player points
+\prs buy neo     : buys the item neodynium ingot with the conditions of the configuration file from the player points
+
+\prs buy life    : increases the maximum health of the player with the conditions from the configuration file
+\prs buy food    : increases the maximum food of the player with the conditions from the configuration file
+\prs buy stamina : increases the maximum stamina of the player with the conditions from the configuration file
 ```
 Source: https://github.com/Cathanys/EmpyrionPlaytimeRewardsShop
