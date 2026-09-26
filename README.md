@@ -1,91 +1,63 @@
-# Empyrion Voting Reward Mod
+# EmpyrionPlaytimeRewardsShop
+
+## What is it?
+With this mod, players can buy items from their playtime.
+This is my first Empyrion mod combining the [Backpack Extender](https://github.com/GitHub-TC/EmpyrionBackpackExtender) and [Playtime Rewards](https://github.com/GitHub-TC/EmpyrionPlaytimeRewards) using the DemoMod as template.
+Thanks for all the support from the Empyrion Discord 💜
+
+## Can this mod damage your game files?
+<a href="url"><img src="https://github.com/Cathanys/EmpyrionPlaytimeRewardsShop/blob/main/images/CleanMod.png" align="left" height="48" width="48" ></a>
+No. This mod only has access to the Empyrion API and does not modify any game files. To disable the mod, remove the EmpyrionPlayerRewardsShop folder from Content\Mods\
 
 ## Installation
-Sie können diesen Mod direkt mit dem MOD-Manager von EWA (Empyrion Web Access) laden. <br/>
-Ohne den EWA funktioniert der Mod (vermutlich) nur innerhalb des EmpyrionModHost
 
-## Konfigurieren Sie Ihre Belohnungen
-Nach der Installation und dem Start des Mods gibt es hier eine Beispielkonfiguration, die angepasst werden kann.
-[SaveGamePath]\\Mods\\VotingReward\\Configuration.json
+This mod only works on servers. Copy the content of the EmpyrionPlayerRewardsShop_vx_x_X.zip into the folder Content\Mods\
+You should have this file structure on your server:
+- Content\Mods\
+	- EmpyrionPlayerRewardsShop\
+ 		- EmpyrionPlayerRewardsShop.dll
+   		- EmpyrionPlayerRewardsShop_Info.yaml
 
-Hier muss auch der API-Schlüssel für den Zugriff auf https://empyrion-servers.com hinterlegt werden
+## Configuration
+After starting the server or game with the mod in the correct folder, the configuration will be created here:
+\[SaveGamePath\]\\Mods\\EmpyrionPlaytimeRewardsShop\\Configuration.json
 
-## Verwendungszweck
-Nach einer Abstimmung auf der Seite https://empyrion-servers.com kann der Spieler seine Belohnung mit der Teilabstimmung anfordern
-* "\\votereward" gibt dir eine Belohnung
-* "\\votelottery" spielt in der Lotterie mit Ihrer Stimme
-* "\\voteforstat health" erhöht deine Gesundheitsmaximum mit deiner Stimme
-* "\\voteforstat stamina" erhöht deine Ausdauermaximum mit deiner Stimme
-* "\\voteforstat food" erhöht dein Essensmaximum mit deiner Stimme
-* "\\voteforstat oxygen" erhöht dein Sauerstoffmaximum mit deiner Stimme
+For each item you want to add to the shop, add an entry in the item rewards sections.
+The item ids are the "Game ID" from the database: https://empyrionbuddy.com (with the correct Scenario activated in their settings)
 
-Mit dem Befehl "\\vote help" kann der Spieler die möglichen Belohnungen und die Anzahl seiner Stimmen abrufen.
+Currently these stats are implemented:
+- "life" - increases the maximum health
+- "exp" - increases the players experience points
 
-Konfigurationsparameter:
-```
-{0} = VotingApiServerKey
-{1} = Player SteamID
-{2} = Player Name
-```
-
-Konfiguration für top-games.net (PlayerName):
-```
-"ServerVotingHomepage": "https://top-games.net",
-"GetUnclaimedVoteUrl" : "https://api.top-games.net/v1/votes/claim-username?server_token={0}&playername={2}",
-"GetUnclaimedVoteMatch": ".*\"claimed\"\\s*:\\s*1\\s*,.*",
-"ClaimedVoteUrl": "",
-```
-
-Konfiguration für top-games.net (SteamId) (scheint nicht zu funktionieren):
-```
-"ServerVotingHomepage": "https://top-games.net",
-"GetUnclaimedVoteUrl" : "https://api.top-games.net/v1/votes/claim-steam?server_token={0}&steam_id={1}",
-"GetUnclaimedVoteMatch": ".*\"claimed\"\\s*:\\s*1\\s*,.*",
-"ClaimedVoteUrl": "",
+```json
+{
+	"ChatCommandPrefix":"/\\prs",
+	"RewardPeriodInMinutes":30,
+	"RewardPointsPerPeriod":1,
+	"RewardItems":
+	[
+		{"Name":"irn","Description":"Iron Ingot","quantity":1000,"price":1,"itemId":8416},
+		{"Name":"neo","Description":"Neodynium Ingot","quantity":1000,"price":1,"itemId":8419
+	],
+	"RewardStats":
+	[
+		{"Name":"life","Description":"Health","quantity":50,"price":1,"maxStat":4000},
+		{"Name":"food","Description":"Food","quantity":50,"price":1,"maxStat":4000},
+		{"Name":"stamina","Description":"Stamina","quantity":50,"price":1,"maxStat":4000},
+		{"Name":"exp","Description":"Experience","quantity":1000,"price":10,"maxStat":500000}
+	]
+}
 ```
 
-# Empyrion Voting Reward Mod
 
-## Installation
-Your can direct load this mod with the EWA (Empyrion Web Access) MOD manager.<br/>
-Without the EWA the mod works only within the EmpyrionModHost
-
-## Config your rewards
-After the installation and the start of the mod is here an example configuration which can be adapted.
-[SaveGamePath]\\Mods\\VotingReward\\Configuration.json
-
-Here also the API key must be deposited for the access to https://empyrion-servers.com
 
 ## Usage
-After a vote on the page https://empyrion-servers.com the player can request his reward with the fractional vote
-* "\\votereward" gives you a reward
-* "\\votelottery" play in the lottery with your vote
-* "\\voteforstat health" increase your m axhealth with you vote
-* "\\voteforstat stamina" increase your max stamina with you vote
-* "\\voteforstat food" increase your max food with you vote
-* "\\voteforstat oxygen" increase your max oxygen with you vote
+Enter the command into the server or faction chat in your game.
 
-With the command "\\vote help" the player can retrieve the possible rewards and his number of votes.
-
-Configuration parameters:
 ```
-{0} = VotingApiServerKey
-{1} = Spieler SteamID
-{2} = Spielername
+\prs help    : shows all available commands in a Window
+\prs points  : updates the points for the player
+\prs buy neo : buys the item neo with the conditions of the configuration file from the player points
+\prs buy life: increases the maximum health of the player with the conditions from the configuration file
 ```
-
-Configuration for top-games.net (PlayerName):
-```
-"ServerVotingHomepage": "https://top-games.net",
-"GetUnclaimedVoteUrl" : "https://api.top-games.net/v1/votes/claim-username?server_token={0}&playername={2}",
-"GetUnclaimedVoteMatch": ".*\"claimed\"\\s*:\\s*1\\s*,.*",
-"ClaimedVoteUrl": "",
-```
-
-Configuration for top-games.net (SteamID) (does not seem to be working):
-```
-"ServerVotingHomepage": "https://top-games.net",
-"GetUnclaimedVoteUrl" : "https://api.top-games.net/v1/votes/claim-steam?server_token={0}&steam_id={1}",
-"GetUnclaimedVoteMatch": ".*\"claimed\"\\s*:\\s*1\\s*,.*",
-"ClaimedVoteUrl": "",
-```
+Source: https://github.com/Cathanys/EmpyrionPlaytimeRewardsShop
