@@ -1,4 +1,4 @@
-# EmpyrionPlaytimeRewardsShop
+# Empyrion Galactic Survival - Playtime Rewards Shop
 
 ## What is it?
 With this mod, players can buy items from their playtime.
