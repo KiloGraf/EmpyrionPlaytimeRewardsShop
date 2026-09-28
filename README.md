@@ -11,7 +11,7 @@ No. This mod only has access to the Empyrion API and does not modify any game fi
 
 ## Installation
 
-This mod only works on servers. Copy the content of the EmpyrionPlayerRewardsShop_vx_x_X.zip into the folder Content\Mods\
+This mod only works on servers. Copy the content of the EmpyrionPlayerRewardsShop_x_x_X.zip into the folder Content\Mods\
 You should have this file structure on your server:
 - Content\Mods\
 	- EmpyrionPlayerRewardsShop\
